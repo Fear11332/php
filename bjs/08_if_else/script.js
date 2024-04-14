@@ -237,7 +237,7 @@ document.querySelector("#submit").addEventListener('click',function(event){
         document.getElementById('btnOver').addEventListener('click', function () {
             if (inputDone&&gameRun){
                 phraseRandom = Math.round( Math.random()*4);
-                if (minValue === maxValue){
+                if (Math.abs(maxValue - minValue) <= 0.00000001 || maxValue <= minValue){
                     answerPhrase = (phraseRandom === 1) ?
                         `Вы загадали неправильное число!\n\u{1F914}` :
                         (phraseRandom==2)?
@@ -438,7 +438,7 @@ document.querySelector("#submit").addEventListener('click',function(event){
         document.getElementById('btnLess').addEventListener('click', function () {
             if (inputDone&&gameRun){
                 phraseRandom = Math.round( Math.random()*4);
-                if (Math.abs(maxValue-minValue-1)<=0.0001){
+                if (Math.abs(maxValue - minValue) <= 0.00000001 || maxValue <= minValue){
                     answerPhrase = (phraseRandom === 1) ?
                         `Вы загадали неправильное число!\n\u{1F914}` :
                         (phraseRandom==2)?
