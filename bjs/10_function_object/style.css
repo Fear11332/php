@@ -1,0 +1,23 @@
+body{
+    background-color: cadetblue;
+}
+
+.btn-group button {
+    padding: 10px 20px;
+    background-color: #136a79;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border-color: #136a79;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #15353a;
+    border-color: #15353a;
+}
+
+.btn-group button:hover {
+    color: #fff; 
+}
