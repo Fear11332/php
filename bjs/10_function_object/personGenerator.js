@@ -29,7 +29,7 @@ const personGenerator = {
             "id_4": "Артем",
             "id_5": "Дмитрий",
             "id_6": "Никита",
-            "id_7": "Михаил",
+            "id_7": "Михайло",
             "id_8": "Даниил",
             "id_9": "Егор",
             "id_10": "Андрей"
@@ -49,50 +49,6 @@ const personGenerator = {
             "id_8": "Ксения",
             "id_9": "Юлия",
             "id_10": "Александра"
-        }
-    }`,
-
-    maleMiddleName: `{  
-        "count": 15,
-        "list": {
-            "id_1": "Иванович",
-            "id_2": "Алексеевич",
-            "id_3": "Дмитриевич",
-            "id_4": "Николаевич",
-            "id_5": "Владимирович",
-            "id_6": "Сергеевич",
-            "id_7": "Андреевич",
-            "id_8": "Михайлович",
-            "id_9": "Александрович",
-            "id_10": "Павлович",
-            "id_11": "Васильевич",
-            "id_12": "Артемович",
-            "id_13": "Егорович",
-            "id_14": "Федорович",
-            "id_15": "Тимофеевич"
-        }
-    }`,
-
-    
-    famaleMiddleName: `{  
-        "count": 15,
-        "list": {
-            "id_1": "Августовна",
-            "id_2": "Батьковна",
-            "id_3": "Аркадьевна",
-            "id_4": "Ахматовна",
-            "id_5": "Гавриловна",
-            "id_6": "Вадимовна",
-            "id_7": "Валентиновна",
-            "id_8": "Борисовна",
-            "id_9": "Валерьевна",
-            "id_10": "Вениаминовна",
-            "id_11": "Викторовна",
-            "id_12": "Генриховна",
-            "id_13": "Григорьевна",
-            "id_14": "Никитична",
-            "id_15": "Афанасьевна",
-            "id_16": "Игоревна"
         }
     }`,
 
@@ -138,7 +94,6 @@ const personGenerator = {
         }
     }`,
 
-
     GENDER_MALE: 'Мужчина',
     GENDER_FEMALE: 'Женщина',
 
@@ -166,9 +121,149 @@ const personGenerator = {
     },
 
     randomMiddleName: function(){
-        return this.randomValue((this.person.gender===this.GENDER_MALE)?
-        this.maleMiddleName
-        :this.famaleMiddleName);
+      let middleName = this.randomValue(this.firstNameMaleJson);
+      let lastCharacter = middleName.slice(-1);
+      let twoLastCharacter = middleName.slice(-2);
+      const currentGender = this.person.gender; 
+      const genderIdentiti=gender=>this.GENDER_MALE==gender;
+        
+      if(
+          middleName==='Никита'  ||
+          middleName==='Аникита' ||
+          middleName==='Мина'    ||
+          middleName==='Савва'   ||
+          middleName==='Сила'    ||
+          middleName==='Фока'    
+          ){
+            middleName = middleName.slice(-middleName.length,-1)+(genderIdentiti(currentGender)?'ич':'ична');
+          }
+      else if(
+            lastCharacter==='ж' ||
+            lastCharacter==='ш' ||
+            lastCharacter==='ч' ||
+            lastCharacter==='щ' ||
+            lastCharacter==='ц'
+          ){
+            middleName+=(genderIdentiti(currentGender)?'eвич':'евна');
+          }
+      else if(
+        lastCharacter==='п' ||
+        lastCharacter==='б' ||
+        lastCharacter==='ф' ||
+        lastCharacter==='в' ||
+        lastCharacter==='т' ||
+        lastCharacter==='д' ||
+        lastCharacter==='с' ||
+        lastCharacter==='з' ||
+        lastCharacter==='к' ||
+        lastCharacter==='г' ||
+        lastCharacter==='х' ||
+        lastCharacter==='м' ||
+        lastCharacter==='н' ||
+        lastCharacter==='р' ||
+        lastCharacter==='л'){
+            middleName+=(genderIdentiti(currentGender)?'ович':'овна');
+        }
+      else if(
+        (lastCharacter==='а'       ||
+        lastCharacter==='y'        ||
+        lastCharacter==='ы'        ||
+        lastCharacter==='о')       && 
+        (twoLastCharacter[0]!=='ж' &&
+        twoLastCharacter[0]!=='ш'  &&
+        twoLastCharacter[0]!=='ч'  &&
+        twoLastCharacter[0]!=='щ'  &&
+        twoLastCharacter[0]!=='ц')){
+          middleName=middleName.slice(-middleName.length,-1)+(genderIdentiti(currentGender)?'ович':'овна');
+        }
+      else if(
+        (lastCharacter==='а'       ||
+        lastCharacter==='y'        ||
+        lastCharacter==='ы'        ||
+        lastCharacter==='о')       && 
+        (twoLastCharacter[0]==='ж' ||
+        twoLastCharacter[0]==='ш'  ||
+        twoLastCharacter[0]==='ч'  ||
+        twoLastCharacter[0]==='щ'  ||
+        twoLastCharacter[0]==='ц')){
+          middleName=middleName.slice(-middleName.length,-1)+(genderIdentiti(currentGender)?'евич':'евна');          
+        }
+      else if(
+        twoLastCharacter==='бь' ||
+        twoLastCharacter==='вь' ||
+        twoLastCharacter==='гь' ||
+        twoLastCharacter==='дь' ||
+        twoLastCharacter==='жь' ||
+        twoLastCharacter==='зь' ||
+        twoLastCharacter==='кь' ||
+        twoLastCharacter==='ль' ||
+        twoLastCharacter==='мь' ||
+        twoLastCharacter==='нь' ||
+        twoLastCharacter==='пь' ||
+        twoLastCharacter==='рь' ||
+        twoLastCharacter==='сь' ||
+        twoLastCharacter==='ть' ||
+        twoLastCharacter==='фь' ||
+        twoLastCharacter==='хь' ||
+        twoLastCharacter==='ць' ||
+        twoLastCharacter==='чь' ||
+        twoLastCharacter==='шь' ||
+        lastCharacter==='е'     ||
+        twoLastCharacter==='ея' ||
+        twoLastCharacter==='ия' ||
+        twoLastCharacter==='ай' ||
+        twoLastCharacter==='яй' ||
+        twoLastCharacter==='ей' ||
+        twoLastCharacter==='эй' ||
+        twoLastCharacter==='ый' ||
+        twoLastCharacter==='ой' ||
+        twoLastCharacter==='уй' ||
+        twoLastCharacter==='юй'){
+          middleName=middleName.slice(-middleName.length,-1)+(genderIdentiti(currentGender)?'евич':'евна');          
+        }
+      else if(lastCharacter==='и'){
+          middleName+=(genderIdentiti(currentGender)?'евич':'евна');          
+        }
+      else if(twoLastCharacter==='ий'){
+          middleName = middleName.slice(-middleName.length,-1);
+          const twoLast = middleName.slice(-2);
+          let flag = false;
+          const consonants = "бвгджзйклмнпрстфхцчшщ";
+          for (let i = 0; i < consonants.length; i++) {
+              for (let j = i + 1; j < consonants.length; j++) {
+                  const pair1 = consonants[i] + consonants[j];
+                  const pair2 = consonants[j] + consonants[i];
+                  if(pair1!=='нт' && pair2!=='тн'){
+                    if (pair1 === middleName.slice(-3,-1) || pair2 ===  middleName.slice(-3,-1)) {
+                        flag = true;
+                    }
+                }
+              }
+          }
+
+          if(
+            twoLast[0]==='к' ||
+            twoLast[0]==='х' ||
+            twoLast[0]==='ц' ||
+            flag){
+              middleName+=(genderIdentiti(currentGender)?'евич':'евна');
+            }
+          else{
+            middleName[middleName.length-1]='ь';
+            middleName+=(genderIdentiti(currentGender)?'евич':'евна')
+          }
+        }
+      else if(
+        twoLastCharacter==='аа' ||
+        twoLastCharacter==='ау' ||
+        twoLastCharacter==='еу' ||
+        twoLastCharacter==='ээ' ||
+        twoLastCharacter==='ии' ||
+        twoLastCharacter==='уу'){
+          middleName+=(genderIdentiti(currentGender)?'евич':'евна');
+        }
+
+      return middleName;
     },
 
     randomProfession: function(){
